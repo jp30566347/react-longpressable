@@ -70,6 +70,9 @@ export default class LongPressable extends React.PureComponent {
       }
     }
 
+    // re-initialize long press
+    this.isLongPressing = false;
+    
     this.startingPosition = eventToPosition(e)
 
     this.timerID = setTimeout(() => {

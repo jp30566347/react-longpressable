@@ -71,6 +71,9 @@ var LongPressable = function (_React$PureComponent) {
         }
       }
 
+      // re-initialize long press
+      _this.isLongPressing = false;
+
       _this.startingPosition = eventToPosition(e);
 
       _this.timerID = setTimeout(function () {

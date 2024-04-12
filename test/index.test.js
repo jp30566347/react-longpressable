@@ -110,4 +110,20 @@ describe('<LongPressable />', () => {
     expect(onLongPress).toHaveBeenCalledTimes(0)
   } )
 
+  it('fires onShortPress when onLongPress previously invoked without onPointerUp invokation', async() => {
+    const { onLongPress, onShortPress, longPressTime } = getDefaultProps()
+    const defaultEvent = {
+      clientX: 0,
+      clientY: 0
+    }
+
+    const wrapper = renderLongPressable(onShortPress, onLongPress, longPressTime)
+    wrapper.instance().onPointerDown(defaultEvent)
+    await timeout(longPressTime + 1)
+    wrapper.instance().onPointerDown(defaultEvent)
+    wrapper.instance().onPointerUp(defaultEvent)
+    expect(onShortPress).toHaveBeenCalledTimes(1)
+    expect(onLongPress).toHaveBeenCalledTimes(1)
+  } )
+
 } )
